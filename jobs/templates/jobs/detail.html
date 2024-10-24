@@ -1,0 +1,251 @@
+{% extends 'jobs-layout.html' %}
+
+{% block header %}
+  <section class="py-4">
+    <div class="mb-4">
+      <a href="{% url 'jobs:index' %}" class="text-decoration-none">
+        <i class="fa-solid fa-arrow-left"></i>
+        All jobs
+      </a>
+    </div>
+  </section>
+{% endblock %}
+
+{% block sidebar %}
+  <aside class="col-3 p-0">
+    <div class="px-2">
+      <h3>{{ job.title }}</h3>
+
+      <div class="d-flex align-items-center column-gap-2">
+        {% if job.is_urgent %}
+          <div>at {{ job.company }}</div>
+          <div class="rounded-circle bg-secondary" style="width: 6px; height: 6px;"></div>
+          <span class="bg-danger text-danger rounded-3 p-1 px-2" style="font-size: 13px; --bs-bg-opacity: .1;">Urgently hiring</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <dl>
+      <div class="px-2 mt-4 border-bottom">
+        <dt class="fw-light fs-6">Submission Deadline</dt>
+        <dl class="mt-2">{{ job.submission_deadline }}</dl>
+      </div>
+
+      <div class="px-2 mt-4 border-bottom">
+        <dt class="fw-light fs-6">Location</dt>
+        <dl class="mt-2">{{ job.location }}</dl>
+      </div>
+
+      <div class="px-2 mt-4 border-bottom">
+        <dt class="fw-light fs-6">Employment Type</dt>
+        <dl class="mt-2">{{ job.employment_type }}</dl>
+      </div>
+
+      <div class="px-2 mt-4 border-bottom">
+        <dt class="fw-light fs-6">Work Type</dt>
+        <dl class="mt-2">{{ job.job_type }}</dl>
+      </div>
+
+      <div class="px-2 mt-4 border-bottom">
+        <dt class="fw-light fs-6">Department</dt>
+        <dl class="mt-2">
+          {% for category in categories %}
+            {{ category }}
+          {% endfor %}
+        </dl>
+      </div>
+
+      <div class="px-2 mt-4 border-bottom">
+        <dt class="fw-light fs-6">Compensation</dt>
+        <dl class="mt-2">${{ job.salary }}</dl>
+      </div>
+    </dl>
+
+    <div class="px-2 mt-4">
+      <a href="{% url 'jobs:detail' job.id %}#application" class="btn btn-lg btn-success w-100">Apply for this job</a>
+    </div>
+  </aside>
+{% endblock %}
+
+{% block jobs_layout %}
+  <div class="container w-75">
+    <ul class="list-unstyled d-flex align-items-center">
+      <li class="border-2 border-bottom border-dark p-1 text-dark list-overview" style="flex: 1;">
+        <a href="{% url 'jobs:detail' job.id %}#overview" class="btn btn-link p-0 border-0 text-reset text-start text-inherit fs-5 fw-normal text-decoration-none d-block w-full btn-overview">Overview</a>
+      </li>
+      <li class="border-2 border-bottom p-1 text-secondary list-application" style="flex: 1;">
+        <a href="{% url 'jobs:detail' job.id %}#application" class="btn btn-link p-0 border-0 text-reset text-start text-inherit fs-5 fw-normal text-decoration-none d-block w-full btn-application">Application</a>
+      </li>
+    </ul>
+
+   <div class="pb-4 overflow-auto" style="max-height: 70vh;">
+      <section class="overview mt-4 pe-3">
+        <div class="mb-4">
+          <p>{{ job.overview|safe }}</p>
+        </div>
+  
+        <div class="mb-4">
+          <h5 class="fs-6 text-decoration-underline mb-3">Location:</h5>
+  
+          <p class="fw-light">Fully-Remote (Work from Home), 9 AM - 5 PM MDT.</p>
+        </div>
+  
+        <div class="mb-4">
+          <h5 class="fs-6 text-decoration-underline mb-3">Key Responsibilities:</h5>
+  
+          <ul class="d-flex flex-column row-gap-2 ms-4">
+            <li>
+              <strong>Mobile Application Development:</strong> Design, build, and maintain Android applications or React Native apps.
+            </li>
+            <li>
+              <strong>Web Application Development:</strong> Develop, maintain, and optimize web applications using modern technologies such as React, Node.js, PHP, or Rails.
+            </li>
+            <li>
+              <strong>Cross-Functional Collaboration:</strong> Work with cross-functional teams to deliver high-quality, responsive web and mobile applications.
+            </li>
+            <li>
+              <strong>Code Quality:</strong> Write clean, scalable, and maintainable code, adhering to best practices.
+            </li>
+            <li>
+              <strong>Version Control:</strong> Utilize Git for version control and participate in code reviews.
+            </li>
+            <li>
+              <strong>Database Management:</strong> Manage and optimize database interactions using SQL and other data management technologies.
+            </li>
+            <li>
+              <strong>Troubleshooting:</strong> Debug, troubleshoot, and resolve performance issues across web and mobile platforms.
+            </li>
+            <li>
+              <strong>Continuous Learning:</strong> Stay up-to-date with emerging technologies and apply them to enhance project performance.
+            </li>
+          </ul>
+        </div>
+  
+        <div class="mb-4">
+          <h5 class="fs-6 text-decoration-underline mb-3">What Success Looks Like:</h5>
+  
+          <ul class="d-flex flex-column row-gap-2 ms-4">
+            <li>
+              <strong>Timely Delivery:</strong> Effective and timely delivery of Android/React Native mobile applications.
+            </li>
+  
+            <li>
+              <strong>Scalable Web Development:</strong> Efficient and scalable web development with optimized back-end systems.
+            </li>
+  
+            <li>
+              <strong>Stakeholder Satisfaction:</strong> Positive feedback from stakeholders and users regarding application functionality.
+            </li>
+  
+            <li>
+              <strong>Issue Resolution:</strong> Quick resolution of bugs and performance issues.
+            </li>
+  
+            <li>
+              <strong>Team Collaboration:</strong>Collaborative teamwork and alignment with client goals.
+            </li>
+  
+            <li>
+              <strong>Professional Growth:</strong> Continuous professional growth and proactive implementation of new technologies.
+            </li>
+          </ul>
+        </div>
+  
+        <div class="mb-4">
+          <h5 class="fs-6 text-decoration-underline mb-3">Required Qualifications:</h5>
+  
+          <ul class="d-flex flex-column row-gap-2 ms-4">
+            <li>
+              <strong>Experience:</strong> Over 1 year of experience in software development, focusing on both web and mobile applications.
+            </li>
+  
+            <li>
+              <strong>Skills:</strong> Proficiency in Android development and/or React Native, web development with React, and back-end technologies (Node.js, PHP, or Rails).
+            </li>
+  
+            <li>
+              <strong>Version Control:</strong> Proficiency with Git for version control.
+            </li>
+  
+            <li>
+              <strong>Database Knowledge:</strong> Solid understanding of SQL and relational databases.
+            </li>
+  
+            <li>
+              <strong>Collaboration:</strong> Excellent communication skills and a collaborative, solution-oriented mindset.
+            </li>
+          </ul>
+        </div>
+  
+        <div class="mb-4">
+          <h5 class="fs-6 text-decoration-underline mb-3">Nice-to-Have Qualifications:</h5>
+  
+          <ul class="d-flex flex-column row-gap-2 ms-4">
+            <li>
+              <strong>Additional Skills:</strong> Experience with Next.js and PHP, graphic design skills for UI/UX contributions.
+            </li>
+  
+            <li>
+              <strong>CI/CD:</strong> Familiarity with deployment (CI/CD) pipelines.
+            </li>
+  
+            <li>
+              <strong>Availability:</strong> Ability to work MDT hours is required.
+            </li>
+          </ul>
+        </div>
+  
+        <div class="mb-4">
+          <h5 class="fs-6 text-decoration-underline mb-3">Application Process:</h5>
+          <p>
+            <strong class="fw-normal">To be considered for this role these steps need to be followed:</strong>
+          </p>
+  
+          <ul class="d-flex flex-column row-gap-2 ms-4">
+            <li>Fill in the application form</li>
+  
+            <li>Record a video showcasing your skill sets</li>
+          </ul>
+        </div>
+  
+        <div>
+          <a href="{% url 'jobs:detail' job.id %}#application" class="btn btn-lg btn-success w-100 rounded-5">Apply for this job</a>
+        </div>
+      </section>
+   </div>
+
+    <div class="pb-4 overflow-auto" style="max-height: 70vh;">
+      <section class="d-none application mt-3 pe-3">
+        {% if has_applied %}
+          <p class="lead px-5">
+            You have applied to this job, Employer will reach you out soon. Browse <a href="{% url 'jobs:index' %}">more jobs</a> to apply
+          </p>
+        {% else %}
+          <form method="post" action="{% url 'jobs:detail' job.id%}">
+            {% csrf_token %}
+            {{ application_form.media }}
+            {% for field in application_form %}
+              <div class="mb-4">
+                <label for="" class="form-label fw-semibold" style="font-size: 17px;">{{ field.label }}:</label>
+  
+                {% if field.name == 'resume' %}
+                  <p class="lead fs-6">Boost your chances! Update your resume with all the tools you’ve mastered and the fields you’ve worked in, and make sure it's in English and in PDF format to make it ATS-friendly and stand out.</p>
+                  <div class="p-4 border rounded-5">{{ field }}</div>
+                {% elif field.name == 'cover_letter' %}
+                  <p class="lead fs-6">Boost your chances! Update your resume with all the tools you’ve mastered and the fields you’ve worked in, and make sure it's in English and in PDF format to make it ATS-friendly and stand out.</p>
+                  {{ field }}
+                {% else %}
+                  {{ field }}
+                {% endif %}
+              </div>
+            {% endfor %}
+  
+            <div class="mt-4">
+              <button type="submit" class="btn btn-lg btn-primary w-100 rounded-5">Submit Application <i class="fa-regular fa-paper-plane fa-sm"></i></button>
+            </div>
+          </form>
+        {% endif %}
+      </section>
+    </div>
+  </div>
+{% endblock %}

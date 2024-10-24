@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block base_content %}
+  <div class="py-4 px-5 mx-auto" style="width: 85%;">
+    {% block header %}
+
+    {% endblock %}
+
+    <div class="row g-4">
+      {% block sidebar %}
+
+      {% endblock %}
+      <main class="col-9">
+        <div>
+          {% block search %}
+
+          {% endblock %}
+
+          {% block jobs_layout %}
+
+          {% endblock %}
+        </div>
+      </main>
+    </div>
+  </div>
+{% endblock %}

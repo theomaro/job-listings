@@ -1,0 +1,272 @@
+{% extends 'jobs-layout.html' %}
+
+{% load date_format %}
+{% load string_format %}
+
+{% block header %}
+  <section class="py-5">
+    <h1 class="fw-semibold">Find your dream job</h1>
+    <p class="lead">Looking for jobs? Browse our latest job openings to view & apply to the best jobs today!</p>
+  </section>
+{% endblock %}
+
+{% block sidebar %}
+  <aside class="col-3 p-0 rounded border bg-secondary" style="--bs-bg-opacity: .05;">
+    <div class="d-flex align-items-center justify-content-between p-3 px-4">
+      <h5 class="fs-6">Filter</h5>
+      <a class="fs-6 text-decoration-none text-danger" href="{% url 'jobs:index' %}">Clear all</a>
+    </div>
+
+    <div class="border-bottom mb-2"></div>
+
+    <form method="get">     
+      <div class="p-3 px-4">
+        <div class="mb-4">
+          <label for="sort_by" class="form-label fw-semibold">Sort by</label>
+          <select name="sort_by" id="" class="form-select py-2" 
+              onchange="this.form.submit()">
+            <option value="title" 
+            {% if request.GET.sort_by == 'title' %} selected {% endif %}>Job Title</option>
+            <option value="company" 
+            {% if request.GET.sort_by == 'company' %} selected {% endif %}>Company name</option>
+            <option value="posted_at" 
+            {% if request.GET.sort_by == 'posted_at' %} selected {% endif %}>Date posted</option>
+            <option value="submission_deadline" 
+            {% if request.GET.sort_by == 'submission_deadline' %} selected {% endif %}>Submission deadline</option>
+            <option value="is_urgent" 
+            {% if request.GET.sort_by == 'is_urgent' %} selected {% endif %}>Urgency</option>
+          </select>
+        </div>
+        
+        <div class="row g-2">
+          <div class="form-check col-6">
+            <input type="radio" name="sort_in" id="" class="form-check-input" default='asc' 
+                onchange="this.form.submit()" value="asc" 
+                {% if request.GET.sort_in == 'asc' %} checked {% endif %}/>
+            <label for="sort_in" class="form-check-label">Ascending</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="radio" name="sort_in" id="" class="form-check-input" 
+                onchange="this.form.submit()" value="desc" 
+                {% if request.GET.sort_in == 'desc' %} checked {% endif %}/>
+            <label for="sort_in" class="form-check-label">Descending</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-bottom my-3 mx-3"></div>
+
+      <div class="p-3 px-4">
+        <label class="form-label fw-semibold">Job Type</label>
+
+        <div class="row g-2">
+          <div class="form-check col-6">
+            <input type="radio" name="employment_type" id="" class="form-check-input" value="full-time" 
+                onchange="this.form.submit()" 
+                {% if request.GET.employment_type == 'full-time' %} checked {% endif %} />
+            <label for="employment_type" class="form-check-label">Full Time</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="radio" name="employment_type" id="" class="form-check-input" value="part-time" 
+                onchange="this.form.submit()" 
+                {% if request.GET.employment_type == 'part-time' %} checked {% endif %} />
+            <label for="employment_type" class="form-check-label">Part Time</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="radio" name="employment_type" id="" class="form-check-input" value="internship" 
+                onchange="this.form.submit()" 
+                {% if request.GET.employment_type == 'internship' %} checked {% endif %} />
+            <label for="employment_type" class="form-check-label">Internship</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="radio" name="employment_type" id="" class="form-check-input" value="volunteer" 
+                onchange="this.form.submit()" 
+                {% if request.GET.employment_type == 'volunteer' %} checked {% endif %} />
+            <label for="employment_type" class="form-check-label">Volunteer</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="radio" name="employment_type" id="" class="form-check-input" value="contract" 
+                onchange="this.form.submit()" 
+                {% if request.GET.employment_type == 'contract' %} checked {% endif %}/>
+            <label for="employment_type" class="form-check-label">Contract</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="radio" name="employment_type" id="" class="form-check-input" value="freelance" 
+                onchange="this.form.submit()" 
+                {% if request.GET.employment_type == 'freelance' %} checked {% endif %} />
+            <label for="employment_type" class="form-check-label">Freelance</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="radio" name="employment_type" id="" class="form-check-input" value="temporary" 
+                onchange="this.form.submit()" 
+                {% if request.GET.employment_type == 'temporary' %} checked {% endif %} />
+            <label for="employment_type" class="form-check-label">Temporary</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-bottom my-2 mx-3"></div>
+
+      <div class="p-3 px-4">
+        <label class="form-label fw-semibold">On-Site/Remote</label>
+
+        <div class="row g-2">
+          <div class="form-check col-6">
+            <input type="radio" name="job_type" id="" class="form-check-input" 
+                onchange="this.form.submit()" value="on-site" 
+                {% if request.GET.job_type == 'on-site' %} checked {% endif %} />
+            <label for="job_type" class="form-check-label">On-site</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="radio" name="job_type" id="" class="form-check-input" 
+                onchange="this.form.submit()" value="remote" 
+                {% if request.GET.job_type == 'remote' %} checked {% endif %} />
+            <label for="job_type" class="form-check-label">Remote</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="radio" name="job_type" id="" class="form-check-input" 
+                onchange="this.form.submit()" value="hybrid" 
+                {% if request.GET.job_type == 'hybrid' %} checked {% endif %} />
+            <label for="job_type" class="form-check-label">Hybrid</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-bottom my-2 mx-3 d-none"></div>
+
+      <div class="p-3 px-4 d-none">
+        <label for="salary-range" class="form-label fw-semibold">Range Salary</label>
+
+        <div class="row g-2">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="" checked />
+            <label class="form-check-label" for="">Under 100,000</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="" />
+            <label class="form-check-label" for="">100,000 - 500,000</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="" />
+            <label class="form-check-label" for="">500,000 - 1,000,000</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="" id="" value="" />
+            <label class="form-check-label" for="">Above 1,000,000</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-bottom my-2 mx-3 d-none"></div>
+
+      <div class="p-3 px-4 d-none">
+        <label class="form-label fw-semibold">Job Function</label>
+
+        <div class="row g-2">
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="On-site" />
+            <label for="" class="form-check-label">Analyst</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Hybrid" />
+            <label for="" class="form-check-label">Teaching</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Remote" checked />
+            <label for="" class="form-check-label">Finance</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Hybrid" />
+            <label for="" class="form-check-label">Management</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="On-site" />
+            <label for="" class="form-check-label">Legal</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="On-site" />
+            <label for="" class="form-check-label">Engineer</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </aside>
+{% endblock %}
+
+{% block search %}
+  <form class="d-flex align-items-center border rounded">
+    {% for field in search_form %}
+      {% if field.label == 'keyword' %}
+        <div class="input-group input-group-lg flex-nowrap">
+          <span class="input-group-text border-0" id="basic-addon1"><i class="fa-solid fa-magnifying-glass fa-xs text-warning"></i></span>
+          {{ field }}
+        </div>
+      {% elif field.label == 'location' %}
+        <div class="input-group input-group-lg flex-nowrap border-start">
+          <span class="input-group-text border-0 rounded-0" id="basic-addon1"><i class="fa-solid fa-location-dot fa-xs text-info"></i></span>
+          {{ field }}
+          <button class="btn btn-success border-0" type="submit" id="button-addon2">Find jobs</button>
+        </div>
+      {% else %}
+
+      {% endif %}
+    {% endfor %}
+  </form>
+{% endblock %}
+
+{% block jobs_layout %}
+  <div class="container mt-4 py-3">
+    <h5 class="mb-3 text-secondary">{{ total_jobs }} Jobs results</h5>
+
+    <div class="mt-3" style="max-height: 92vh; overflow-y: auto; overflow-x: hidden;">
+      {% if jobs %}
+        <ul class="row align-items-stretch g-4 px-0 bg-white">
+          {% for job in jobs %}
+            <div class="col-12">
+              <div class="shadow-sm bg-body-tertiary border border-secondary rounded p-4" style="--bs-border-opacity: .2;">
+                <div class="d-flex gap-3">
+                  <div class="rounded d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; --bs-bg-opacity: .3;">
+                    <i class="fa-solid fa-folder-tree fa-2x"></i>
+                  </div>
+
+                  <div class="d-flex justify-content-between" style="flex: 1;">
+                    <div>
+                      <h5><a href="{% url 'jobs:detail' job.id %}" class="text-decoration-none">{{ job.title }}</a></h5>
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="text-secondary rounded-5 p-1 fw-semibold" style="font-size: 13px; --bs-bg-opacity: .1;">{{ job.company }}</span>
+                        <div class="rounded-circle bg-secondary" style="width: 6px; height: 6px;"></div>
+                        <span class="bg-warning text-warning-emphasis rounded-3 p-1 px-2" style="font-size: 13px; --bs-bg-opacity: .1;">{{ job.employment_type }}</span>
+                        <div class="rounded-circle bg-secondary" style="width: 6px; height: 6px;"></div>
+                        <span class="bg-info text-info-emphasis rounded-3 p-1 px-2" style="font-size: 13px; --bs-bg-opacity: .1;">{{ job.job_type }}</span>
+                        {% if job.is_urgent %}
+                          <div class="rounded-circle bg-secondary" style="width: 6px; height: 6px;"></div>
+                          <span class="bg-danger text-danger rounded-3 p-1 px-2" style="font-size: 13px; --bs-bg-opacity: .1;">Urgently hiring</span>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <div class="text-end">
+                      <div class="fw-semibold">
+                        <i class="fa-solid fa-location-dot"></i>
+                        {{ job.location }}
+                      </div>
+                      <div class="text-secondary" style="font-size: 15px;">Posted {{ job.posted_at|days_until }} days ago</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="py-2 ps-3 ms-5 w-75">
+                  {% for para in job.overview|map_to_list %}
+                    <li class="ms-4">{{ para|safe }}</li>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="lead p-5">No Jobs have been added yet! Come back later.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

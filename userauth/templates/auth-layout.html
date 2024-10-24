@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block base_content %}
+  <main class="container d-flex align-items-center justify-content-center" style="min-height: 90vh; max-width: 50%;">
+    <div class="row rounded-4 shadow overflow-hidden">
+      <section class="col-6 p-5 bg-info text-dark" style="--bs-bg-opacity: 0.25;">
+        <div class="d-flex flex-column row-gap-4">
+          {% block auth_content_aside %}
+
+          {% endblock %}
+        </div>
+      </section>
+
+      <section class="col-6">
+        <form method="post" class="p-5">
+          {% csrf_token %}
+
+          {% block auth_content_form %}
+
+          {% endblock %}
+        </form>
+      </section>
+    </div>
+  </main>
+{% endblock %}

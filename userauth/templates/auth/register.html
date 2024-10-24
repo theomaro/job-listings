@@ -1,0 +1,27 @@
+{% extends 'auth-layout.html' %}
+
+{% block auth_content_aside %}
+  <h3 class="fw-semibold">INFORMATION</h3>
+  <div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni qui ullam, aut doloremque culpa mollitia sed optio unde incidunt. Libero totam enim sit est quibusdam soluta corrupti veniam, iusto reiciendis.</p>
+    <p>
+      <strong>Eligendi</strong>: ullam perferendis ratione error quas suscipit. Obcaecati rerum numquam placeat at. Asperiores exercitationem quidem harum fugit vel blanditiis maiores illo quos.
+    </p>
+  </div>
+  <div>
+    <a href="{% url 'userauth:login' %}" class="btn bg-dark text-light px-3" style="padding-block: 8px; border-radius: 10px 0 10px 0;">Already have an account</a>
+  </div>
+{% endblock %}
+
+{% block auth_content_form %}
+  {% for field in register_form %}
+    <div class="mb-3 d-flex flex-column">
+      <label class="form-label fw-semibold" for="{{ field.auto_id }}">{{ field.label }}</label>
+      {{ field }}
+    </div>
+  {% endfor %}
+
+  <div class="mt-5">
+    <button type="submit" class="btn btn-warning px-4" style="padding-block: 10px; border-radius: 10px 0 10px 0;">Register</button>
+  </div>
+{% endblock %}

@@ -1,0 +1,210 @@
+{% extends 'jobs-layout.html' %}
+
+{% load date_format %}
+
+{% block header %}
+  <section class="py-4 pb-5">
+    <div class="mb-4">
+      <a href="{% url 'jobs:index' %}" class="text-decoration-none">
+        <i class="fa-solid fa-arrow-left"></i>
+        All jobs
+      </a>
+    </div>
+
+    <h1 class="fw-semibold">Trace your dream job</h1>
+  </section>
+{% endblock %}
+
+{% block sidebar %}
+  <aside class="col-3 p-0 rounded border bg-secondary" style="--bs-bg-opacity: .05;">
+    <div class="d-flex align-items-center justify-content-between p-3 px-4">
+      <h5 class="fs-6">Filter</h5>
+      <a class="fs-6 text-decoration-none text-danger" href="#">Clear all</a>
+    </div>
+
+    <div class="border-bottom mb-2"></div>
+
+    <form>
+      <div class="p-3 px-4">
+        <label class="form-label fw-semibold">Date Post</label>
+        <select name="" id="" class="form-select py-2">
+          <option value="">Anytime</option>
+          <option value="">This Week</option>
+          <option value="">This Month</option>
+        </select>
+      </div>
+
+      <div class="border-bottom my-2 mx-3"></div>
+
+      <div class="p-3 px-4">
+        <label class="form-label fw-semibold">Job Type</label>
+
+        <div class="row g-2">
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Full Time" checked />
+            <label for="" class="form-check-label">Full Time</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Internship" />
+            <label for="" class="form-check-label">Internship</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Volunteer" />
+            <label for="" class="form-check-label">Volunteer</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Contract" />
+            <label for="" class="form-check-label">Contract</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Freelance" />
+            <label for="" class="form-check-label">Freelance</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-bottom my-2 mx-3"></div>
+
+      <div class="p-3 px-4">
+        <label class="form-label fw-semibold">Range Salary</label>
+
+        <div class="row g-2">
+          <div class="form-check col-6">
+            <input class="form-check-input" type="radio" name="salary-range" id="" value="" checked />
+            <label class="form-check-label" for="">Under $1000</label>
+          </div>
+          <div class="form-check col-6">
+            <input class="form-check-input" type="radio" name="salary-range" id="" value="" />
+            <label class="form-check-label" for="">$1000 - $2500</label>
+          </div>
+          <div class="form-check col-6">
+            <input class="form-check-input" type="radio" name="salary-range" id="" value="" />
+            <label class="form-check-label" for="">$2500 - $5000</label>
+          </div>
+          <div class="form-check col-6">
+            <input class="form-check-input" type="radio" name="salary-range" id="" value="" />
+            <label class="form-check-label" for="">Custom</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-bottom my-2 mx-3"></div>
+
+      <div class="p-3 px-4">
+        <label class="form-label fw-semibold">On-Site/Remote</label>
+
+        <div class="row g-2">
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="On-site" />
+            <label for="" class="form-check-label">On-site</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Hybrid" />
+            <label for="" class="form-check-label">Hybrid</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Remote" checked />
+            <label for="" class="form-check-label">Remote</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-bottom my-2 mx-3"></div>
+
+      <div class="p-3 px-4">
+        <label class="form-label fw-semibold">Job Function</label>
+
+        <div class="row g-2">
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="On-site" />
+            <label for="" class="form-check-label">Analyst</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Hybrid" />
+            <label for="" class="form-check-label">Teaching</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Remote" checked />
+            <label for="" class="form-check-label">Finance</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="Hybrid" />
+            <label for="" class="form-check-label">Management</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="On-site" />
+            <label for="" class="form-check-label">Legal</label>
+          </div>
+          <div class="form-check col-6">
+            <input type="checkbox" name="" id="" class="form-check-input" value="On-site" />
+            <label for="" class="form-check-label">Engineer</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </aside>
+{% endblock %}
+
+{% block search %}
+  <div class="d-flex align-items-center border rounded">
+    <div class="input-group input-group-lg flex-nowrap">
+      <span class="input-group-text border-0" id="basic-addon1"><i class="fa-solid fa-magnifying-glass fa-xs text-warning"></i></span>
+      <input type="search" class="form-control border-0 customer-input" placeholder="Search jot title or keyword" aria-label="Search jot title or keyword" aria-describedby="basic-addon1" />
+    </div>
+
+    <div class="input-group input-group-lg flex-nowrap border-start">
+      <span class="input-group-text border-0" id="basic-addon1"><i class="fa-solid fa-location-dot fa-xs text-info"></i></span>
+      <input type="search" class="form-control border-0 customer-input" placeholder="Country or timezone" aria-label="Country or timezone" aria-describedby="basic-addon1" />
+      <button class="btn btn-success border-0" type="button" id="button-addon2">Find jobs</button>
+    </div>
+  </div>
+{% endblock %}
+
+{% block jobs_layout %}
+  <div class="container mt-4 py-3">
+    <h5 class="mb-3 text-secondary">{{ total_applications }} Applications applied</h5>
+
+    <div class="mt-3" style="max-height: 92vh; overflow-y: auto; overflow-x: hidden;">
+      {% if applications %}
+        <ul class="row align-items-stretch g-4 px-0 bg-white">
+          {% for application in applications %}
+            <div class="col-12">
+              <div class="shadow-sm bg-body-tertiary border border-secondary rounded p-4" style="--bs-border-opacity: .2;">
+                <div class="d-flex gap-3">
+                  <div class="rounded d-flex justify-content-center align-items-center" style="width: 50px; height: 50px; --bs-bg-opacity: .3;">
+                    <i class="fa-solid fa-folder-tree fa-2x"></i>
+                  </div>
+
+                  <div class="d-flex justify-content-between" style="flex: 1;">
+                    <div>
+                      <h5><a href="{% url 'jobs:detail' application.job.id %}" class="text-decoration-none">{{ application.job.title }}</a></h5>
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="text-secondary rounded-5 p-1 fw-semibold" style="font-size: 13px; --bs-bg-opacity: .1;">{{ application.job.company }}</span>
+                        <div class="rounded-circle bg-secondary" style="width: 6px; height: 6px;"></div>
+                        <span class="bg-warning text-warning-emphasis rounded-3 p-1 px-2" style="font-size: 13px; --bs-bg-opacity: .1;">Full-time</span>
+                        <div class="rounded-circle bg-secondary" style="width: 6px; height: 6px;"></div>
+                        <span class="bg-danger text-danger rounded-3 p-1 px-2" style="font-size: 13px; --bs-bg-opacity: .1;">${{ application.job.salary }}</span>
+                      </div>
+                    </div>
+
+                    <div class="text-end">
+                      <div class="fw-semibold">
+                        <i class="fa-solid fa-location-dot"></i>
+                        {{ application.job.location }}
+                      </div>
+                      <div class="text-secondary" style="font-size: 15px;">Applied {{ application.applied_at|days_until }} days ago</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="lead p-5">
+          You haven't applied to any job recently. Browse <a href="{% url 'jobs:index' %}">more jobs</a> to apply
+        </p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
