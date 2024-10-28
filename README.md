@@ -1,9 +1,11 @@
 # Job Listing Application
 
-A simple job listing application were job seekers can view open posts, search, sort, filter jobs and apply to a job.
+A simple [job listing](./) application were job seekers can view open posts, search, sort, filter jobs and apply to a job.
+
+[Live Demo](./)
 
 ## Table of Content
-  
+
 - [Job Listing Application](#job-listing-application)
   - [Table of Content](#table-of-content)
     - [How to run](#how-to-run)
@@ -55,22 +57,22 @@ A simple job listing application were job seekers can view open posts, search, s
 
 ### Screenshot
 
-1. User Registration page
+1. **User Registration page**
 
     ![User Registration page](./screenshots/signup-form.png)
 
-2. User Login Page
+2. **User Login Page**
 
    ![User Login Page](./screenshots/signin-form.png)
 
-3. Job Listings page
+3. **Job Listings page**
 
    ![Job Listings page](./screenshots/jobs-listings.png)
 
-4. Job Detail Page
+4. **Job Detail Page**
 
    ![Job Detail Page](./screenshots/job-detail.png)
 
-5. Job Application Page
+5. **Job Application Page**
 
    ![Job Application Page](./screenshots/job-application.png)
