@@ -98,9 +98,11 @@ DATABASES = {
     }
 }
 
+
 DATABASES["default"] = dj_database_url.config(
     conn_max_age=600,
     ssl_require=True,
+    default="mssql://root:0011@localhost:3306/joblistings?init_command=SET sql_mode='STRICT_TRANS_TABLES'&charset=utf8mb4",
 )
 
 
