@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,6 +33,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "job-listings-df813cf84dda.herokuapp.com",
     "127.0.0.1",
+    "localhost",
 ]
 
 
@@ -95,6 +97,11 @@ DATABASES = {
         "PASSWORD": "0011",
     }
 }
+
+DATABASES["default"] = dj_database_url.config(
+    conn_max_age=600,
+    ssl_require=True,
+)
 
 
 # Password validation
