@@ -90,20 +90,10 @@ WSGI_APPLICATION = "joblistings.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "joblistings",
-        "HOST": "localhost",
-        "USER": "root",
-        "PASSWORD": "0011",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
-
-DATABASES["default"] = dj_database_url.config(
-    conn_max_age=600,
-    default="mysql://root:0011@localhost:3306/joblistings?init_command=SET sql_mode='STRICT_TRANS_TABLES'&charset=utf8mb4",
-    # ssl_require=True,
-)
 
 
 # Password validation
